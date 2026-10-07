@@ -319,9 +319,24 @@ Decision: Keep network first, but if the network has not answered within 3 secon
 Why: On the Product Owner's phone in airplane mode the app stayed on its splash screen. When something (e.g. a VPN) makes the phone look connected, requests never fail; they just wait. D-039 waited forever. Tested: with a network that never answers, Recipe Detail now opens in about 3 seconds; truly offline it opens instantly.
 
 ### D-057 Servings appear only in Ingredients
-Approved · 2026-10-07 · Tech Lead + Product Owner
+Superseded by D-058
 Decision: The Recipe Detail metadata row shows total time and optional calories only. Servings appear in the Ingredients section with the serving stepper.
 Why: Avoids showing the same information twice.
+
+### D-058 Recipe Detail metadata shows "Serves N" (supersedes D-057)
+Approved · 2026-10-07 · Tech Lead + Product Owner
+Decision: The metadata row shows total time, optional calories and "Serves 4" (the recipe's base servings). The Ingredients section keeps its serving stepper.
+Why: The recipe's yield belongs to its identity at a glance; the stepper is the tool for changing it.
+
+---
+
+## Milestone 04 — Technical checkpoint (D-005)
+
+### D-059 Stay vanilla JavaScript for Create/Edit
+Approved · 2026-10-07 · Tech Lead + Product Owner
+Decision: Milestone 04 is built in plain HTML/CSS/JavaScript (no Svelte, no build step). Dexie is added as one self-hosted file. Forms follow one pattern: a draft Recipe v1 object is the single source of truth; typing updates the draft without redrawing; adding, removing or reordering rows redraws only that list; saving runs validate() and then stores the draft. Screens never call Dexie directly (only `js/db/`), and `js/model/` contains no screen code.
+Re-evaluate Svelte at the Milestone 04 gate if: screen/data sync bugs need fixing more than once; the form screen file grows past ~400 lines; or a later milestone needs the same data live on several screens at once.
+Why: Svelte would only shorten the form code. It would add a build pipeline the Product Owner cannot see into, require rebuilding working screens, and add ongoing tool upkeep. Data model, database, parsing and photo code would transfer unchanged if a migration is ever needed.
 
 ---
 
