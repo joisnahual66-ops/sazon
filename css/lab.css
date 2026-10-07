@@ -108,3 +108,7 @@
   font-size: var(--text-meta);
   color: var(--color-ink-soft);
 }
+
+.placeholder .btn + .btn {
+  margin-top: var(--space-3);
+}

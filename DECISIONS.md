@@ -281,18 +281,37 @@ Approved · 2026-10-07 · Tech Lead + Product Owner
 Decision: User photos are shown inside organic masks on a color backdrop. No background removal (it would require AI, out of scope per D-002).
 
 ### D-050 Self-hosted fonts
-Proposed · 2026-10-07 · Claude
+Approved · 2026-10-07 · Tech Lead + Product Owner
 Decision: Font files (Latin subset, variable weight, WOFF2) are stored in the repository under `fonts/` with their OFL license files, and cached by the service worker. Google Fonts' servers are not used.
 Why: Fonts loaded from Google are not saved for offline use by our service worker (it only handles our own site), so offline the app would fall back to system fonts. Self-hosting is free, works offline, adds ~78 KB, and sends no visitor data to a third party.
 
 ### D-051 Interface icons: Lucide
-Proposed · 2026-10-07 · Claude
+Approved · 2026-10-07 · Tech Lead + Product Owner
 Decision: Interface icons come from Lucide (ISC license), embedded as inline SVG. No icon library is loaded.
 Why: Free, consistent 2 px rounded line style matching Appendix B; inline SVG needs no extra files or requests.
 
 ### D-052 Temporary Design Lab page
-Proposed · 2026-10-07 · Claude
+Approved · 2026-10-07 · Tech Lead + Product Owner
 Decision: `lab.html` (styled by `css/lab.css`) shows every design-system piece for review on the phone. Both are temporary and are deleted once real screens replace them.
+
+---
+
+## Milestone 03 — Recipe Detail
+
+### D-053 Recipe Detail: continuous vertical layout
+Approved · 2026-10-07 · Tech Lead + Product Owner
+Decision: Recipe Detail reads top to bottom like an editorial cookbook: Photo → Recipe identity → Metadata → Ingredients → Let's cook → Notes → Source. No tabs for Ingredients / Steps / Nutrition.
+Why: A recipe should read naturally in one scroll, not be split across tabs.
+
+### D-054 Screens are built from data
+Proposed · 2026-10-07 · Claude
+Decision: Each screen is a JavaScript function that receives data (e.g. one Recipe v1 object) and builds the screen. Code is split into small files loaded as native browser modules (no build step): `js/screens/` (screens), `js/ui/` (shared pieces), `js/format.js` (display text), `js/data/` (sample data), `js/pages/` (what each page shows). Text from data is always inserted as plain text, never as HTML. Interface icons live in one shared file, `icons/ui.svg`.
+Why: Swapping the sample recipe for one from the device database later changes one line, not the screen. Plain-text insertion keeps user-typed content from breaking the page.
+
+### D-055 Recipe Detail lives at recipe.html for now
+Proposed · 2026-10-07 · Claude
+Decision: Until navigation between screens exists, Recipe Detail is its own page (`recipe.html`), reached from the placeholder start page. How screens connect (one page with in-app navigation vs separate pages) is decided when My Recipes (Milestone 05) needs to open a recipe.
+Why: Avoids committing to a navigation approach before there are two screens to connect. The screen function (D-054) works either way.
 
 ---
 

@@ -1,0 +1,110 @@
+/* Recipe Detail screen layout (D-053). Uses only design tokens and app.css components. */
+
+.rd {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  padding: var(--space-2) var(--screen-margin) calc(96px + var(--space-6));
+}
+
+/* Hero */
+
+.rd-hero {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.rd-hero__card {
+  position: relative;
+  padding: var(--space-5);
+  border-radius: var(--radius-card-lg);
+}
+
+.rd-hero__actions {
+  position: absolute;
+  top: var(--space-3);
+  right: var(--space-3);
+  display: flex;
+  gap: var(--space-2);
+}
+
+.rd-hero__title {
+  margin-top: var(--space-2);
+}
+
+/* Metadata */
+
+.rd-meta {
+  padding: var(--space-3) 0;
+  border-top: 1px solid var(--color-line);
+  border-bottom: 1px solid var(--color-line);
+}
+
+.rd-meta .meta {
+  font-size: var(--text-label);
+}
+
+/* Cards (Ingredients, Notes) */
+
+.rd-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding: var(--space-5) var(--space-4);
+  border-radius: var(--radius-card-lg);
+}
+
+.rd-ingredients {
+  background: var(--color-surface);
+}
+
+.rd-ingredients__controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.rd-subhead {
+  margin-top: var(--space-2);
+  font-size: var(--text-meta);
+  font-weight: var(--weight-semibold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-ink-soft);
+}
+
+/* Let's cook */
+
+.rd-steps {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  padding-top: var(--space-4);
+}
+
+/* Source */
+
+.rd-source {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-4) 0;
+  text-align: center;
+}
+
+.rd-source__rule {
+  width: 48px;
+  height: 2px;
+  background: var(--color-ink);
+}
+
+.rd-source__link {
+  color: var(--color-ink);
+  min-height: var(--touch-target);
+  display: inline-flex;
+  align-items: center;
+}
