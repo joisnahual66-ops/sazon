@@ -313,6 +313,11 @@ Proposed · 2026-10-07 · Claude
 Decision: Until navigation between screens exists, Recipe Detail is its own page (`recipe.html`), reached from the placeholder start page. How screens connect (one page with in-app navigation vs separate pages) is decided when My Recipes (Milestone 05) needs to open a recipe.
 Why: Avoids committing to a navigation approach before there are two screens to connect. The screen function (D-054) works either way.
 
+### D-056 Service worker: network first with a 3-second limit (supersedes D-039 on approval)
+Proposed · 2026-10-07 · Claude
+Decision: Keep network first, but if the network has not answered within 3 seconds, show the saved copy. After one failure, skip the network for 30 seconds so the rest of the page loads instantly from the saved copy. A late network answer still refreshes the saved copy.
+Why: On the Product Owner's phone in airplane mode the app stayed on its splash screen. When something (e.g. a VPN) makes the phone look connected, requests never fail; they just wait. D-039 waited forever. Tested: with a network that never answers, Recipe Detail now opens in about 3 seconds; truly offline it opens instantly.
+
 ---
 
 ## Open questions
