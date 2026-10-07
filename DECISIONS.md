@@ -343,19 +343,58 @@ Why: Svelte would only shorten the form code. It would add a build pipeline the 
 ## Milestone 04 — Task 004A: device storage
 
 ### D-060 Database schema version 1
-Proposed · 2026-10-07 · Claude
+Approved · 2026-10-07 · Tech Lead + Product Owner
 Decision: IndexedDB database `sazon`, managed by Dexie 4.4.6 (self-hosted at `js/vendor/dexie.mjs`). Version 1 has the four stores of D-016, with these indexes: `recipes`: id, title, createdAt, updatedAt, categoryIds (multi-value); `categories`: id, order; `photos`: id; `settings`: id. All other Recipe v1 fields are stored unindexed. Future changes add `version(2)`; version 1 is never edited. Recipe Detail opens a stored recipe at `recipe.html?id=<UUID>`.
 Why: Indexes cover the lookups planned for v0.1 (open by id, sort by name/date, filter by category). `isFavorite` is not indexed because IndexedDB cannot index true/false values; favorites are filtered in memory (fine at personal-collection size).
 
 ### D-061 Temporary development seed and storage check
-Proposed · 2026-10-07 · Claude
+Approved · 2026-10-07 · Tech Lead + Product Owner
 Decision: When the recipes store is empty, the Tacos de pollo sample is stored once (fixed UUID, so it can never be duplicated). The start page shows a temporary "DEV · Storage check" panel, and Recipe Detail opened from the start page shows a small "DEV" line naming its source. All of it (`js/dev/`, `css/dev.css`, `js/db/seed.js`) is removed once recipes can be created in the app.
 Why: Lets the Product Owner verify the database on the phone without developer tools. Known limitation while it exists: deleting every recipe would bring the sample back on the next launch.
 
 ### D-062 Ask for persistent storage
-Proposed · 2026-10-07 · Claude
+Approved · 2026-10-07 · Tech Lead + Product Owner
 Decision: The app asks the browser to keep its data (`navigator.storage.persist()`) and reports the answer honestly. "Not granted" means the browser may clear app data under storage pressure; backup/export (D-009) remains the real protection.
 Why: Chrome decides by itself (no prompt), usually granting it to installed, frequently used apps; it cannot be forced.
+
+---
+
+## Milestone 04 — Task 004B: Create/Edit
+
+### D-063 Create/Edit form details
+Approved · 2026-10-07 · Tech Lead + Product Owner
+Decision:
+- One form for both: `edit.html` (new) and `edit.html?id=<UUID>` (edit). Recipe Detail has an Edit (pencil) button. Save goes to `recipe.html?id=<UUID>`; the form page is not kept in Back history.
+- Amounts are typed as text and understood on Save: 2, 0.5, 0,5, 1/2, 1 1/2, ½, 1½, ranges 2-3 / 2–3 / 2 to 3. Choosing "to taste" disables the amount. "Other unit…" accepts a custom unit (e.g. handful).
+- Ingredient note and group are tucked under "Note & group" per row to keep phone entry short.
+- Empty ingredient rows and empty steps are ignored on Save; a partly filled ingredient without a name is an error. Errors are listed at the top (tap to jump) and the field is highlighted; nothing typed is lost.
+- Unsaved changes: the form's own Close asks "Discard your changes?"; leaving by other means (Back, closing the page) triggers the browser's standard leave-page warning.
+- Until categories exist, a new recipe's card color is picked automatically from its id (one of the six card colors), saved in `appearance.color`, and `categoryIds` is saved as an empty list.
+- Error highlight uses yellow + ink outline (heart red stays reserved for Favorite, D-045).
+- The temporary storage check on the start page lists every stored recipe as a link, so recipes can be opened before My Recipes exists (removed with the rest of the dev UI, D-061).
+Why: Keeps mobile entry fast, keeps saved data strictly Recipe v1, and makes the 004B device test possible without building My Recipes.
+
+---
+
+## Maintenance
+
+### D-064 Service worker always checks the server for newer files (extends D-056)
+Proposed · 2026-10-07 · Claude
+Decision: When online, the service worker asks the server whether each file changed (`cache: 'no-cache'`) instead of reusing the browser's short-term copy, and a new version's offline copy is always downloaded fresh (`cache: 'reload'`). Everything else in D-056 is unchanged: 3-second limit, saved copy when offline or too slow, 30-second network skip after a failure.
+Why: GitHub Pages lets browsers reuse files for up to 10 minutes, so an online reopen could still show the previous version. Now the next online open shows the new deployment.
+Tradeoff: each online open makes one small "has it changed?" request per file (≈40 tiny requests, usually answered "not modified"). On a slow connection this can make opening slightly slower, but never longer than the 3-second fallback. Stored recipes (IndexedDB) are never touched by updates.
+
+---
+
+## Product feedback
+
+### UT-001 Usability Test #001 (2026-10-07)
+Tester: first-time user (Product Owner's spouse), second device (Samsung, Chrome), unaided.
+- Created "Pipián" with 13 ingredients and 4 steps without help; saved and opened correctly.
+- Described editing as easy.
+- Spontaneously requested photos for the recipe and for individual steps, and possibly video.
+- Spontaneously requested nutritional information.
+Outcome: video and automatic nutrition remain outside v0.1 (D-002). Main and step photos are already supported by Recipe v1 (`photoId`, `steps[].photoId`) and remain for the photo milestone; manual calories per serving already exist (D-029).
 
 ---
 
