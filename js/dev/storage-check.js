@@ -4,6 +4,7 @@
 import { h } from '../ui/dom.js';
 import { DATABASE_NAME, SCHEMA_VERSION, requestPersistentStorage, storageEstimate } from '../db/database.js';
 import { listRecipes, getRecipe } from '../db/recipes.js';
+import { photoStats } from '../db/photos.js';
 import { ensureSeed, SEED_RECIPE_ID } from '../db/seed.js';
 
 function row(label, value, ok) {
@@ -33,6 +34,10 @@ export async function runStorageCheck(container) {
         h('li', {}, h('a', { href: `./recipe.html?id=${encodeURIComponent(r.id)}&dev` }, r.title))
       ))
     ));
+
+    const photos = await photoStats();
+    const linked = all.filter((r) => r.photoId).length;
+    rows.push(row('Photos stored', `${photos.count} (${size(photos.bytes)}) · recipes with a photo: ${linked}`, photos.count === linked));
 
     const recipe = await getRecipe(SEED_RECIPE_ID);
     rows.push(row('Read back', recipe ? `${recipe.title} ✓` : 'Missing', !!recipe));

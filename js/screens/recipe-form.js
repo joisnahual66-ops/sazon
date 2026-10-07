@@ -218,7 +218,8 @@ function sourceEditor(draft) {
 
 /* ---------- Screen ---------- */
 
-export function renderRecipeForm(draft, { isNew, onSave, onCancel }) {
+// photoSection: the photo area element (built by the page with js/ui/photo-field.js)
+export function renderRecipeForm(draft, { isNew, onSave, onCancel, photoSection = null }) {
   const errorBox = h('div', { class: 'rf-errors', role: 'alert', hidden: true });
 
   const save = (extraClass = '') => {
@@ -250,6 +251,7 @@ export function renderRecipeForm(draft, { isNew, onSave, onCancel }) {
       saveTop
     ),
     errorBox,
+    photoSection,
     h('section', { class: 'rf-card' }, title.element, description.element),
     card('Basics', h('div', { class: 'rf-grid' }, servings.element, prep.element, cook.element, calories.element)),
     ingredientsEditor(draft),

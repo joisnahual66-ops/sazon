@@ -379,7 +379,7 @@ Why: Keeps mobile entry fast, keeps saved data strictly Recipe v1, and makes the
 ## Maintenance
 
 ### D-064 Service worker always checks the server for newer files (extends D-056)
-Proposed · 2026-10-07 · Claude
+Approved · 2026-10-07 · Tech Lead + Product Owner
 Decision: When online, the service worker asks the server whether each file changed (`cache: 'no-cache'`) instead of reusing the browser's short-term copy, and a new version's offline copy is always downloaded fresh (`cache: 'reload'`). Everything else in D-056 is unchanged: 3-second limit, saved copy when offline or too slow, 30-second network skip after a failure.
 Why: GitHub Pages lets browsers reuse files for up to 10 minutes, so an online reopen could still show the previous version. Now the next online open shows the new deployment.
 Tradeoff: each online open makes one small "has it changed?" request per file (≈40 tiny requests, usually answered "not modified"). On a slow connection this can make opening slightly slower, but never longer than the 3-second fallback. Stored recipes (IndexedDB) are never touched by updates.
@@ -395,6 +395,22 @@ Tester: first-time user (Product Owner's spouse), second device (Samsung, Chrome
 - Spontaneously requested photos for the recipe and for individual steps, and possibly video.
 - Spontaneously requested nutritional information.
 Outcome: video and automatic nutrition remain outside v0.1 (D-002). Main and step photos are already supported by Recipe v1 (`photoId`, `steps[].photoId`) and remain for the photo milestone; manual calories per serving already exist (D-029).
+
+---
+
+## Milestone 04 — Task 004C.1: main recipe photo
+
+### D-065 Main photo: processing, storage and clean-up
+Proposed · 2026-10-07 · Claude
+Decision:
+- Picking: one "Photo" area at the top of Create/Edit (`<input type="file" accept="image/*">`, so Android offers camera or gallery). Add, preview, Replace, Remove.
+- Processing, on the device with built-in browser features only (no library): camera rotation applied (`createImageBitmap(..., { imageOrientation: 'from-image' })`); display image longest side 1200 px (WebP, quality 0.82); thumbnail longest side 300 px (WebP, quality 0.75); aspect ratio kept; JPEG used automatically if a browser can't make WebP. The original file is never stored.
+- Storage: `photos` store record `{ id (UUID), display (Blob), thumb (Blob), width, height, createdAt }`; the recipe keeps `photoId`. Only `js/db/photos.js` and `js/db/recipes.js` touch the photos store.
+- Nothing is written until Save. Save stores the new photo, the recipe, and deletes the replaced/removed photo in ONE database transaction (all or nothing). Cancelling (or leaving) never touches stored photos. Deleting a recipe also deletes its photo.
+- Recipe Detail reads the photo from the device database and shows it inside the existing organic mask; with no photo, the designed placeholder remains (D-003).
+- A photo the phone can't decode (e.g. some HEIC files) shows a friendly message and keeps the previous state.
+- Temporary DEV information: original → stored sizes in the form; photo count/size and "recipes with a photo" in the start-page storage check (they must match: no orphans).
+Why: Small, fast, offline photos without new dependencies, and no way to lose or orphan a photo by cancelling.
 
 ---
 

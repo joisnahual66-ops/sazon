@@ -23,7 +23,7 @@ function topBar(recipe) {
   );
 }
 
-function hero(recipe) {
+function hero(recipe, photoUrl) {
   // Favorite and Share are visual only in Milestone 03.
   const favorite = h('button', {
     class: 'icon-btn icon-btn--filled',
@@ -34,9 +34,11 @@ function hero(recipe) {
 
   const share = h('button', { class: 'icon-btn icon-btn--filled', type: 'button', 'aria-label': 'Share recipe' }, icon('share'));
 
-  // No photo storage yet: always the placeholder inside the mask.
+  // Stored photo inside the organic mask, or the designed placeholder (D-003, D-049).
   const photo = h('div', { class: 'photo-frame' },
-    h('div', { class: 'photo-frame__image photo-frame__placeholder', role: 'img', 'aria-label': `Photo of ${recipe.title}` })
+    photoUrl
+      ? h('img', { class: 'photo-frame__image', src: photoUrl, alt: `Photo of ${recipe.title}` })
+      : h('div', { class: 'photo-frame__image photo-frame__placeholder', role: 'img', 'aria-label': `Photo of ${recipe.title}` })
   );
 
   return h('section', { class: 'rd-hero' },
@@ -151,10 +153,11 @@ function source(recipe) {
 
 /* ---------- Screen ---------- */
 
-export function renderRecipeDetail(recipe) {
+// options.photoUrl: address of the recipe's stored photo (loaded by the page), if any.
+export function renderRecipeDetail(recipe, { photoUrl = null } = {}) {
   return h('main', { class: 'rd' },
     topBar(recipe),
-    hero(recipe),
+    hero(recipe, photoUrl),
     metadata(recipe),
     ingredients(recipe),
     steps(recipe),

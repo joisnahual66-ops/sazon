@@ -5,6 +5,6 @@ import { h } from '../ui/dom.js';
 
 export function devStrip(recipe) {
   return h('p', { class: 'dev-strip' },
-    `DEV · Loaded from device database (IndexedDB) · id ${recipe.id.slice(0, 8)}… · stored ${recipe.updatedAt}`
+    `DEV · Loaded from device database (IndexedDB) · id ${recipe.id.slice(0, 8)}… · stored ${recipe.updatedAt} · photo: ${recipe.photoId ? recipe.photoId.slice(0, 8) + '… (from IndexedDB)' : 'none'}`
   );
 }

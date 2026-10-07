@@ -2,6 +2,7 @@
 // Address: recipe.html?id=<recipe UUID>  (D-055). Without an id, shows the most recent recipe.
 
 import { getRecipe, listRecipes } from '../db/recipes.js';
+import { getPhoto } from '../db/photos.js';
 import { ensureSeed } from '../db/seed.js';
 import { renderRecipeDetail, renderRecipeNotFound } from '../screens/recipe-detail.js';
 import { bottomNav } from '../ui/bottom-nav.js';
@@ -9,6 +10,16 @@ import { devStrip } from '../dev/dev-strip.js';
 
 const app = document.getElementById('app');
 const params = new URLSearchParams(location.search);
+let photoUrl = null;
+
+// The photo comes from the device database, never the network.
+async function loadPhotoUrl(photoId) {
+  if (photoUrl) URL.revokeObjectURL(photoUrl);
+  photoUrl = null;
+  const photo = await getPhoto(photoId);
+  if (photo && photo.display) photoUrl = URL.createObjectURL(photo.display);
+  return photoUrl;
+}
 
 async function show() {
   await ensureSeed();
@@ -22,7 +33,7 @@ async function show() {
   }
 
   document.title = `${recipe.title} · Sazón`;
-  const screen = renderRecipeDetail(recipe);
+  const screen = renderRecipeDetail(recipe, { photoUrl: await loadPhotoUrl(recipe.photoId) });
   if (params.has('dev')) screen.append(devStrip(recipe));
   app.replaceChildren(screen, bottomNav('recipes'));
 }

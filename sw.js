@@ -2,7 +2,7 @@
 // Strategy (D-056 + D-064): network first, always checking the server for a newer file,
 // with a 3-second limit; saved copy when offline or too slow.
 
-const CACHE_NAME = 'sazon-v8';
+const CACHE_NAME = 'sazon-v9';
 
 // Paths are relative to this file, so they work under /sazon/ on GitHub Pages (D-038).
 const APP_FILES = [
@@ -35,6 +35,9 @@ const APP_FILES = [
   './js/db/database.js',
   './js/db/recipes.js',
   './js/db/seed.js',
+  './js/db/photos.js',
+  './js/media/resize-image.js',
+  './js/ui/photo-field.js',
   './js/dev/dev-strip.js',
   './js/dev/storage-check.js',
   './manifest.webmanifest',
