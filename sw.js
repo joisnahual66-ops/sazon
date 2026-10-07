@@ -1,7 +1,7 @@
 // Sazón service worker (updated in Milestone 03).
 // Strategy (D-056): network first with a 3-second limit; saved copy when offline or too slow.
 
-const CACHE_NAME = 'sazon-v4';
+const CACHE_NAME = 'sazon-v5';
 
 // Paths are relative to this file, so they work under /sazon/ on GitHub Pages (D-038).
 const APP_FILES = [
