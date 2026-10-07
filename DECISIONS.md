@@ -340,6 +340,25 @@ Why: Svelte would only shorten the form code. It would add a build pipeline the 
 
 ---
 
+## Milestone 04 — Task 004A: device storage
+
+### D-060 Database schema version 1
+Proposed · 2026-10-07 · Claude
+Decision: IndexedDB database `sazon`, managed by Dexie 4.4.6 (self-hosted at `js/vendor/dexie.mjs`). Version 1 has the four stores of D-016, with these indexes: `recipes`: id, title, createdAt, updatedAt, categoryIds (multi-value); `categories`: id, order; `photos`: id; `settings`: id. All other Recipe v1 fields are stored unindexed. Future changes add `version(2)`; version 1 is never edited. Recipe Detail opens a stored recipe at `recipe.html?id=<UUID>`.
+Why: Indexes cover the lookups planned for v0.1 (open by id, sort by name/date, filter by category). `isFavorite` is not indexed because IndexedDB cannot index true/false values; favorites are filtered in memory (fine at personal-collection size).
+
+### D-061 Temporary development seed and storage check
+Proposed · 2026-10-07 · Claude
+Decision: When the recipes store is empty, the Tacos de pollo sample is stored once (fixed UUID, so it can never be duplicated). The start page shows a temporary "DEV · Storage check" panel, and Recipe Detail opened from the start page shows a small "DEV" line naming its source. All of it (`js/dev/`, `css/dev.css`, `js/db/seed.js`) is removed once recipes can be created in the app.
+Why: Lets the Product Owner verify the database on the phone without developer tools. Known limitation while it exists: deleting every recipe would bring the sample back on the next launch.
+
+### D-062 Ask for persistent storage
+Proposed · 2026-10-07 · Claude
+Decision: The app asks the browser to keep its data (`navigator.storage.persist()`) and reports the answer honestly. "Not granted" means the browser may clear app data under storage pressure; backup/export (D-009) remains the real protection.
+Why: Chrome decides by itself (no prompt), usually granting it to installed, frequently used apps; it cannot be forced.
+
+---
+
 ## Open questions
 
 - ~~Q-1 App UI language~~ → resolved by D-033.

@@ -159,3 +159,14 @@ export function renderRecipeDetail(recipe) {
     source(recipe)
   );
 }
+
+// Shown when the requested recipe is not on this device.
+export function renderRecipeNotFound() {
+  return h('main', { class: 'rd' },
+    topBar(),
+    h('section', { class: 'rd-hero' },
+      h('h1', { class: 't-title' }, 'Recipe not found'),
+      h('p', { class: 't-body t-soft' }, 'This recipe isn’t saved on this device.')
+    )
+  );
+}
