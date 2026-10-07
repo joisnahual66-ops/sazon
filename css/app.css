@@ -1,4 +1,7 @@
-/* Milestone 01: minimal readable styles only. The design system arrives in Milestone 02. */
+/* Sazón Design System v0.1 — base styles and reusable components.
+   All values come from tokens.css. */
+
+/* ---------- Base ---------- */
 
 * {
   box-sizing: border-box;
@@ -11,34 +14,428 @@ body {
 }
 
 body {
-  background: #F4ECE6;
-  color: #2B2422;
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  line-height: 1.5;
+  background: var(--color-bg);
+  color: var(--color-ink);
+  font-family: var(--font-text);
+  font-size: var(--text-body);
+  line-height: var(--leading-body);
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
 }
 
-.placeholder {
-  min-height: 100vh;
-  min-height: 100dvh;
+h1, h2, h3, p {
+  margin: 0;
+}
+
+button,
+input {
+  font: inherit;
+  color: inherit;
+}
+
+:focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: 2px;
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+  flex: none;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.icon--sm {
+  width: 18px;
+  height: 18px;
+}
+
+/* ---------- Typography ---------- */
+
+.t-display,
+.t-title,
+.t-section {
+  font-family: var(--font-display);
+  font-weight: var(--weight-display);
+}
+
+.t-display {
+  font-size: var(--text-display);
+  line-height: var(--leading-display);
+  letter-spacing: var(--tracking-display);
+}
+
+.t-title {
+  font-size: var(--text-title);
+  line-height: var(--leading-title);
+  letter-spacing: var(--tracking-display);
+}
+
+.t-section {
+  font-size: var(--text-section);
+  line-height: var(--leading-section);
+}
+
+.t-body {
+  font-size: var(--text-body);
+  line-height: var(--leading-body);
+}
+
+.t-label {
+  font-size: var(--text-label);
+  line-height: var(--leading-label);
+  font-weight: var(--weight-medium);
+}
+
+.t-meta {
+  font-size: var(--text-meta);
+  line-height: var(--leading-meta);
+  font-weight: var(--weight-medium);
+}
+
+.t-soft {
+  color: var(--color-ink-soft); /* neutral backgrounds only */
+}
+
+/* ---------- Color utilities (cards) ---------- */
+
+.bg-salmon { background: var(--color-salmon); }
+.bg-mint { background: var(--color-mint); }
+.bg-cream { background: var(--color-cream); }
+.bg-yellow { background: var(--color-yellow); }
+.bg-lavender { background: var(--color-lavender); }
+.bg-aqua { background: var(--color-aqua); }
+.bg-surface { background: var(--color-surface); }
+
+/* ---------- Button ---------- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: var(--touch-target);
+  padding: 0 var(--space-5);
+  border: 0;
+  border-radius: var(--radius-pill);
+  font-size: var(--text-body);
+  font-weight: var(--weight-semibold);
+  cursor: pointer;
+}
+
+.btn:active {
+  transform: scale(0.97);
+}
+
+.btn--primary {
+  background: var(--color-yellow);
+  color: var(--color-ink);
+}
+
+.btn--secondary {
+  background: var(--color-surface);
+  color: var(--color-ink);
+  box-shadow: inset 0 0 0 1.5px var(--color-ink);
+}
+
+/* Large action card ("Ingredients →", "Let's cook →") */
+.action-card {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  width: 100%;
+  min-height: 88px;
+  padding: var(--space-4) var(--space-5);
+  border: 0;
+  border-radius: var(--radius-card-lg);
+  text-align: left;
+  cursor: pointer;
+}
+
+.action-card:active {
+  transform: scale(0.98);
+}
+
+/* ---------- Icon button ---------- */
+
+.icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--touch-target);
+  height: var(--touch-target);
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--color-ink);
+  cursor: pointer;
+}
+
+.icon-btn--filled {
+  background: var(--color-surface);
+}
+
+.icon-btn:active {
+  background: var(--color-surface-sunken);
+}
+
+/* Favorite: the only place --color-heart is used */
+.icon-btn[aria-pressed="true"] .icon {
+  fill: var(--color-heart);
+  stroke: var(--color-heart);
+}
+
+/* ---------- Chip / pill ---------- */
+
+.chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  padding: 0 var(--space-4);
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: var(--color-surface-sunken);
+  color: var(--color-ink);
+  font-size: var(--text-label);
+  font-weight: var(--weight-medium);
+  cursor: pointer;
+  position: relative;
+}
+
+/* Extends the tap area to 48px without changing the look */
+.chip::after {
+  content: '';
+  position: absolute;
+  inset: -4px 0;
+}
+
+/* Selected: color AND weight, never color alone */
+.chip[aria-pressed="true"] {
+  background: var(--color-yellow);
+  font-weight: var(--weight-semibold);
+  box-shadow: inset 0 0 0 1.5px var(--color-ink);
+}
+
+/* ---------- Input ---------- */
+
+.field {
   display: flex;
   flex-direction: column;
+  gap: var(--space-1);
+}
+
+.field__label {
+  font-size: var(--text-meta);
+  font-weight: var(--weight-medium);
+  color: var(--color-ink-soft);
+}
+
+.input {
+  width: 100%;
+  min-height: var(--touch-target);
+  padding: var(--space-3) var(--space-4);
+  border: 1.5px solid transparent;
+  border-radius: var(--radius-input);
+  background: var(--color-surface-sunken);
+  font-size: var(--text-body);
+}
+
+.input::placeholder {
+  color: var(--color-ink-soft);
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--color-ink);
+  background: var(--color-surface);
+}
+
+.search {
+  position: relative;
+}
+
+.search .icon {
+  position: absolute;
+  left: var(--space-4);
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.search .input {
+  padding-left: calc(var(--space-4) + 24px + var(--space-2));
+  border-radius: var(--radius-pill);
+}
+
+/* ---------- Metadata item ---------- */
+
+.meta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-4);
+}
+
+.meta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-size: var(--text-meta);
+  line-height: var(--leading-meta);
+  font-weight: var(--weight-medium);
+}
+
+/* ---------- Photo frame / mask ---------- */
+
+.photo-frame {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  width: 100%;
+}
+
+.photo-frame__image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  -webkit-mask-image: url('../masks/blob-1.svg');
+  mask-image: url('../masks/blob-1.svg');
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+}
+
+/* Stand-in shown until a real photo exists */
+.photo-frame__placeholder {
+  background:
+    radial-gradient(circle at 35% 35%, rgba(255, 255, 255, 0.55), transparent 45%),
+    linear-gradient(135deg, rgba(34, 28, 25, 0.10), rgba(34, 28, 25, 0.28));
+}
+
+/* ---------- Recipe card ---------- */
+
+.recipe-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  border-radius: var(--radius-card-lg);
+  color: var(--color-ink);
+}
+
+.recipe-card__fav {
+  position: absolute;
+  top: var(--space-1);
+  right: var(--space-1);
+  z-index: 1;
+}
+
+.recipe-card__title {
+  font-family: var(--font-display);
+  font-weight: var(--weight-display);
+  font-size: 20px;
+  line-height: var(--leading-section);
+}
+
+/* ---------- Category card ---------- */
+
+.category-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 148px;
+  padding: var(--space-4);
+  border-radius: var(--radius-card-lg);
+  color: var(--color-ink);
+  overflow: hidden;
+}
+
+.category-card__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--space-2);
+}
+
+.category-card__name {
+  font-family: var(--font-display);
+  font-weight: var(--weight-display);
+  font-size: var(--text-section);
+  line-height: var(--leading-section);
+}
+
+/* Slot for Jorge's flat SVG illustration */
+.category-card__art {
+  align-self: flex-end;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: rgba(34, 28, 25, 0.12);
+}
+
+/* ---------- Bottom navigation ---------- */
+
+.bottom-nav {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: var(--space-2) var(--space-2) calc(var(--space-2) + env(safe-area-inset-bottom));
+  background: var(--color-surface);
+  box-shadow: 0 -1px 0 var(--color-line);
+}
+
+.bottom-nav__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
-  padding: 24px;
+  gap: 2px;
+  min-width: 64px;
+  min-height: 56px;
+  border: 0;
+  background: transparent;
+  color: var(--color-ink-soft);
+  font-size: var(--text-meta);
+  font-weight: var(--weight-medium);
+  cursor: pointer;
 }
 
-h1 {
-  margin: 0 0 8px;
-  font-size: 2.75rem;
-  line-height: 1.1;
+.bottom-nav__item[aria-current="page"] {
+  color: var(--color-ink);
+  font-weight: var(--weight-semibold);
 }
 
-p {
-  margin: 0 0 8px;
-  font-size: 1.125rem;
+.bottom-nav__add {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--color-yellow);
+  color: var(--color-ink);
+  cursor: pointer;
 }
 
-.status {
-  margin-top: 24px;
-  font-size: 0.875rem;
-  opacity: 0.7;
+.bottom-nav__add:active {
+  transform: scale(0.94);
 }

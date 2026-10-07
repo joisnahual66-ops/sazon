@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Sazón · Design Lab</title>
+  <meta name="theme-color" content="#E8A08A">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" href="./icons/icon-192.png" type="image/png">
+  <link rel="preload" href="./fonts/bricolage-grotesque.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="./fonts/dm-sans.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="./css/tokens.css">
+  <link rel="stylesheet" href="./css/app.css">
+  <link rel="stylesheet" href="./css/lab.css">
+</head>
+<body>
+
+  <!-- Interface icons: Lucide (lucide.dev), ISC license -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="i-back" viewBox="0 0 24 24"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></symbol>
+    <symbol id="i-heart" viewBox="0 0 24 24"><path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5"/></symbol>
+    <symbol id="i-more" viewBox="0 0 24 24"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5v14"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></symbol>
+    <symbol id="i-flame" viewBox="0 0 24 24"><path d="M12 3q1 4 4 6.5t3 5.5a1 1 0 0 1-14 0 5 5 0 0 1 1-3 1 1 0 0 0 5 0c0-2-1.5-3-1.5-5q0-2 2.5-4"/></symbol>
+    <symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><path d="M16 3.128a4 4 0 0 1 0 7.744"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><circle cx="9" cy="7" r="4"/></symbol>
+    <symbol id="i-home" viewBox="0 0 24 24"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24"><path d="M12 5v16"/><path d="M20.001 19A2 2 0 0022 17V5a2 2 0 00-1.999-2L16 3.002A5 5 0 0012 5a5 5 0 00-4-2H4a2 2 0 00-2 2v12a2 2 0 001.999 2H8a5 5 0 014 2 5 5 0 014-2z"/></symbol>
+    <symbol id="i-grid" viewBox="0 0 24 24"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/></symbol>
+    <symbol id="i-user" viewBox="0 0 24 24"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></symbol>
+  </svg>
+
+  <main class="lab">
+
+    <header class="lab__intro">
+      <a class="icon-btn lab__back" href="./" aria-label="Back"><svg class="icon"><use href="#i-back"/></svg></a>
+      <p class="t-meta t-soft">Temporary · Milestone 02</p>
+      <h1 class="t-display">Design Lab v0.1</h1>
+      <p class="t-body t-soft">Every piece of the Sazón design system, for review on a real phone. Not a product screen.</p>
+    </header>
+
+    <!-- 1. Typography -->
+    <section class="lab-section">
+      <h2 class="lab-section__label">Typography</h2>
+      <p class="t-display">Good morning, Jorge!</p>
+      <p class="t-title">Chilaquiles verdes</p>
+      <p class="t-section">Ingredients</p>
+      <p class="t-body">Crispy tortilla chips simmered in tangy tomatillo salsa, topped with crema, queso fresco and a fried egg. Áéíóú ñ ¿¡ ½</p>
+      <p class="t-label">Label · Recipe name</p>
+      <p class="t-meta">Metadata · 30 min · 420 kcal · 4 servings</p>
+      <p class="lab-note">Display / Title / Section: Bricolage Grotesque 600 · 40 / 32 / 22 px. Body: DM Sans 16 px. Label 15 px. Metadata 13 px (minimum).</p>
+    </section>
+
+    <!-- 2. Color -->
+    <section class="lab-section">
+      <h2 class="lab-section__label">Color</h2>
+      <div class="lab-grid">
+        <div class="swatch swatch--outlined" style="background: var(--color-bg)"><span class="swatch__name">bg</span><span class="t-meta">#F2E6DF</span></div>
+        <div class="swatch swatch--outlined bg-surface"><span class="swatch__name">surface</span><span class="t-meta">#FAF3EE</span></div>
+        <div class="swatch" style="background: var(--color-surface-sunken)"><span class="swatch__name">surface-sunken</span><span class="t-meta">#E9DCD4</span></div>
+        <div class="swatch" style="background: var(--color-line)"><span class="swatch__name">line</span><span class="t-meta">#D9C8BE · decorative</span></div>
+        <div class="swatch swatch--ink"><span class="swatch__name">ink</span><span class="t-meta">#221C19</span></div>
+        <div class="swatch swatch--ink-soft"><span class="swatch__name">ink-soft</span><span class="t-meta">#5E514A · neutral bg only</span></div>
+        <div class="swatch bg-salmon"><span class="swatch__name">salmon</span><span class="t-meta">#FB8E80 · 7.4:1</span></div>
+        <div class="swatch bg-mint"><span class="swatch__name">mint</span><span class="t-meta">#BCD9C7 · 11.1:1</span></div>
+        <div class="swatch bg-cream swatch--outlined"><span class="swatch__name">cream</span><span class="t-meta">#F6EBD9 · 14.3:1</span></div>
+        <div class="swatch bg-yellow"><span class="swatch__name">yellow</span><span class="t-meta">#FDD873 · 12.2:1</span></div>
+        <div class="swatch bg-lavender"><span class="swatch__name">lavender</span><span class="t-meta">#C8B0FA · 8.9:1</span></div>
+        <div class="swatch bg-aqua"><span class="swatch__name">aqua</span><span class="t-meta">#8ED6CB · 10.1:1</span></div>
+        <div class="swatch swatch--heart"><span class="swatch__name">heart</span><span class="t-meta">#E0453A · favorite only</span></div>
+      </div>
+      <p class="lab-note">Ratios = ink text on that color. Text on any card color is always ink.</p>
+    </section>
+
+    <!-- 3. Buttons -->
+    <section class="lab-section">
+      <h2 class="lab-section__label">Buttons</h2>
+      <div class="lab-row">
+        <button class="btn btn--primary" type="button">Save recipe</button>
+        <button class="btn btn--secondary" type="button">Cancel</button>
+      </div>
+      <button class="action-card bg-yellow" type="button">
+        <span class="t-title">Ingredients</span>
+        <svg class="icon"><use href="#i-arrow"/></svg>
+      </button>
+      <button class="action-card bg-salmon" type="button">
+        <span class="t-title">Let’s cook</span>
+        <svg class="icon"><use href="#i-arrow"/></svg>
+      </button>
+    </section>
+
+    <!-- 4. Icon buttons -->
+    <section class="lab-section">
+      <h2 class="lab-section__label">Icon buttons</h2>
+      <div class="lab-row">
+        <button class="icon-btn" type="button" aria-label="Back"><svg class="icon"><use href="#i-back"/></svg></button>
+        <button class="icon-btn" type="button" aria-label="More"><svg class="icon"><use href="#i-more"/></svg></button>
+        <button class="icon-btn icon-btn--filled" type="button" aria-label="Add to favorites" aria-pressed="false"><svg class="icon"><use href="#i-heart"/></svg></button>
+        <button class="icon-btn icon-btn--filled" type="button" aria-label="Remove from favorites" aria-pressed="true"><svg class="icon"><use href="#i-heart"/></svg></button>
+      </div>
+      <p class="lab-note">All tap areas are 48 × 48 px. Heart shown off and on (favorite).</p>
+    </section>
+
+    <!-- 5. Chips -->
+    <section class="lab-section">
+      <h2 class="lab-section__label">Chips / pills</h2>
+      <div class="chip-row">
+        <button class="chip" type="button" aria-pressed="true">All</button>
+        <button class="chip" type="button" aria-pressed="false">Favorites</button>
+        <button class="chip" type="button" aria-pressed="false">Recent</button>
+        <button class="chip" type="button" aria-pressed="false">Mine</button>
+      </div>
+      <p class="lab-note">Selected = yellow + outline + heavier text (not color alone).</p>
+    </section>
+
+    <!-- 6. Inputs -->
+    <section class="lab-section">
+      <h2 class="lab-section__label">Inputs</h2>
+      <label class="search">
+        <svg class="icon"><use href="#i-search"/></svg>
+        <input class="input" type="search" placeholder="Search recipes…" aria-label="Search recipes">
+      </label>
+      <label class="field">
+        <span class="field__label">Recipe name</span>
+        <input class="input" type="text" value="Pasta al limón">
+      </label>
+      <label class="field">
+        <span class="field__label">Description</span>
+        <input class="input" type="text" placeholder="Quick and fresh…">
+      </label>
+    </section>
+
+    <!-- 7. Metadata -->
+    <section class="lab-section">
+      <h2 class="lab-section__label">Metadata</h2>
+      <div class="meta-row">
+        <span class="meta"><svg class="icon icon--sm"><use href="#i-clock"/></svg>30 min</span>
+        <span class="meta"><svg class="icon icon--sm"><use href="#i-flame"/></svg>420 kcal</span>
+        <span class="meta"><svg class="icon icon--sm"><use href="#i-users"/></svg>4</span>
+      </div>
+    </section>
+
+    <!-- 8. Photo frame -->
+    <section class="lab-section">
+      <h2 class="lab-section__label">Photo frame / mask</h2>
+      <div class="lab-grid">
+        <div class="swatch bg-salmon" style="padding: var(--space-3)">
+          <div class="photo-frame"><div class="photo-frame__image photo-frame__placeholder"></div></div>
+        </div>
+        <div class="swatch bg-mint" style="padding: var(--space-3)">
+          <div class="photo-frame"><div class="photo-frame__image photo-frame__placeholder"></div></div>
+        </div>
+      </div>
+      <p class="lab-note">Temporary blob-1 mask. Jorge’s masks replace it by swapping masks/blob-1.svg — no code change.</p>
+    </section>
+
+    <!-- 9. Recipe cards -->
+    <section class="lab-section">
+      <h2 class="lab-section__label">Recipe cards</h2>
+      <div class="lab-grid">
+        <article class="recipe-card bg-yellow">
+          <button class="icon-btn recipe-card__fav" type="button" aria-label="Remove from favorites" aria-pressed="true"><svg class="icon"><use href="#i-heart"/></svg></button>
+          <div class="photo-frame"><div class="photo-frame__image photo-frame__placeholder"></div></div>
+          <h3 class="recipe-card__title">Tacos de pollo</h3>
+          <div class="meta-row">
+            <span class="meta"><svg class="icon icon--sm"><use href="#i-clock"/></svg>30 min</span>
+            <span class="meta"><svg class="icon icon--sm"><use href="#i-users"/></svg>4</span>
+          </div>
+        </article>
+        <article class="recipe-card bg-mint">
+          <button class="icon-btn recipe-card__fav" type="button" aria-label="Add to favorites" aria-pressed="false"><svg class="icon"><use href="#i-heart"/></svg></button>
+          <div class="photo-frame"><div class="photo-frame__image photo-frame__placeholder"></div></div>
+          <h3 class="recipe-card__title">Pasta al limón</h3>
+          <div class="meta-row">
+            <span class="meta"><svg class="icon icon--sm"><use href="#i-clock"/></svg>25 min</span>
+            <span class="meta"><svg class="icon icon--sm"><use href="#i-users"/></svg>4</span>
+          </div>
+        </article>
+        <article class="recipe-card bg-salmon">
+          <button class="icon-btn recipe-card__fav" type="button" aria-label="Add to favorites" aria-pressed="false"><svg class="icon"><use href="#i-heart"/></svg></button>
+          <div class="photo-frame"><div class="photo-frame__image photo-frame__placeholder"></div></div>
+          <h3 class="recipe-card__title">Pozole rojo</h3>
+          <div class="meta-row">
+            <span class="meta"><svg class="icon icon--sm"><use href="#i-clock"/></svg>2 h</span>
+            <span class="meta"><svg class="icon icon--sm"><use href="#i-users"/></svg>8</span>
+          </div>
+        </article>
+        <article class="recipe-card bg-lavender">
+          <button class="icon-btn recipe-card__fav" type="button" aria-label="Remove from favorites" aria-pressed="true"><svg class="icon"><use href="#i-heart"/></svg></button>
+          <div class="photo-frame"><div class="photo-frame__image photo-frame__placeholder"></div></div>
+          <h3 class="recipe-card__title">Brownies</h3>
+          <div class="meta-row">
+            <span class="meta"><svg class="icon icon--sm"><use href="#i-clock"/></svg>50 min</span>
+            <span class="meta"><svg class="icon icon--sm"><use href="#i-users"/></svg>12</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- 10. Category cards -->
+    <section class="lab-section">
+      <h2 class="lab-section__label">Category cards</h2>
+      <div class="lab-grid">
+        <div class="category-card bg-yellow">
+          <div class="category-card__head"><span class="category-card__name">Breakfast</span><svg class="icon icon--sm"><use href="#i-arrow"/></svg></div>
+          <span class="t-meta">24 recipes</span>
+          <span class="category-card__art" aria-hidden="true"></span>
+        </div>
+        <div class="category-card bg-salmon">
+          <div class="category-card__head"><span class="category-card__name">Mexican</span><svg class="icon icon--sm"><use href="#i-arrow"/></svg></div>
+          <span class="t-meta">36 recipes</span>
+          <span class="category-card__art" aria-hidden="true"></span>
+        </div>
+        <div class="category-card bg-mint">
+          <div class="category-card__head"><span class="category-card__name">Soups</span><svg class="icon icon--sm"><use href="#i-arrow"/></svg></div>
+          <span class="t-meta">18 recipes</span>
+          <span class="category-card__art" aria-hidden="true"></span>
+        </div>
+        <div class="category-card bg-lavender">
+          <div class="category-card__head"><span class="category-card__name">Pasta</span><svg class="icon icon--sm"><use href="#i-arrow"/></svg></div>
+          <span class="t-meta">22 recipes</span>
+          <span class="category-card__art" aria-hidden="true"></span>
+        </div>
+        <div class="category-card bg-aqua">
+          <div class="category-card__head"><span class="category-card__name">Salads</span><svg class="icon icon--sm"><use href="#i-arrow"/></svg></div>
+          <span class="t-meta">16 recipes</span>
+          <span class="category-card__art" aria-hidden="true"></span>
+        </div>
+        <div class="category-card bg-cream">
+          <div class="category-card__head"><span class="category-card__name">Desserts</span><svg class="icon icon--sm"><use href="#i-arrow"/></svg></div>
+          <span class="t-meta">27 recipes</span>
+          <span class="category-card__art" aria-hidden="true"></span>
+        </div>
+      </div>
+      <p class="lab-note">Dark circles are slots for Jorge’s flat illustrations.</p>
+    </section>
+
+    <p class="lab-note">Bottom navigation is pinned below ↓</p>
+  </main>
+
+  <!-- 11. Bottom navigation -->
+  <nav class="bottom-nav" aria-label="Main">
+    <button class="bottom-nav__item" type="button" aria-current="page"><svg class="icon"><use href="#i-home"/></svg>Home</button>
+    <button class="bottom-nav__item" type="button"><svg class="icon"><use href="#i-book"/></svg>My Recipes</button>
+    <button class="bottom-nav__add" type="button" aria-label="New recipe"><svg class="icon"><use href="#i-plus"/></svg></button>
+    <button class="bottom-nav__item" type="button"><svg class="icon"><use href="#i-grid"/></svg>Categories</button>
+    <button class="bottom-nav__item" type="button"><svg class="icon"><use href="#i-user"/></svg>Profile</button>
+  </nav>
+
+  <script src="./js/app.js"></script>
+</body>
+</html>

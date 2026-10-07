@@ -1,0 +1,87 @@
+/* Sazón Design System v0.1 — design tokens.
+   Every color, size, space and radius in the app comes from here.
+   Change a value here and it changes everywhere. */
+
+/* Fonts are self-hosted (not loaded from Google) so they also work offline. */
+@font-face {
+  font-family: 'Bricolage Grotesque';
+  src: url('../fonts/bricolage-grotesque.woff2') format('woff2');
+  font-weight: 200 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'DM Sans';
+  src: url('../fonts/dm-sans.woff2') format('woff2');
+  font-weight: 100 1000;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* Neutrals */
+  --color-bg: #F2E6DF;
+  --color-surface: #FAF3EE;
+  --color-surface-sunken: #E9DCD4;
+  --color-ink: #221C19;
+  --color-ink-soft: #5E514A;      /* neutral backgrounds only */
+  --color-line: #D9C8BE;          /* decorative dividers only */
+
+  /* Card palette — text on these is always --color-ink */
+  --color-salmon: #FB8E80;
+  --color-mint: #BCD9C7;
+  --color-cream: #F6EBD9;
+  --color-yellow: #FDD873;
+  --color-lavender: #C8B0FA;
+  --color-aqua: #8ED6CB;
+
+  /* Semantic: favorite state only, never decorative */
+  --color-heart: #E0453A;
+
+  /* Typography */
+  --font-display: 'Bricolage Grotesque', 'Trebuchet MS', system-ui, sans-serif;
+  --font-text: 'DM Sans', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+
+  --text-display: 40px;
+  --text-title: 32px;
+  --text-section: 22px;
+  --text-body: 16px;
+  --text-label: 15px;
+  --text-meta: 13px;              /* minimum size anywhere */
+
+  --leading-display: 1;
+  --leading-title: 1.05;
+  --leading-section: 1.15;
+  --leading-body: 1.5;
+  --leading-label: 1.2;
+  --leading-meta: 1.3;
+
+  --tracking-display: -0.02em;
+
+  --weight-display: 600;
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+
+  /* Spacing scale (4-based). No other values. */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+
+  --screen-margin: var(--space-4);
+
+  /* Shape */
+  --radius-card-lg: 24px;
+  --radius-card-sm: 16px;
+  --radius-input: 16px;
+  --radius-pill: 999px;
+
+  /* Interaction */
+  --touch-target: 48px;
+  --focus-ring: 2px solid var(--color-ink);
+}

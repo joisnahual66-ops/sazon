@@ -1,18 +1,24 @@
-// Milestone 01 service worker.
+// Sazón service worker (updated in Milestone 02).
 // Strategy (D-039): network first. Always try the internet and keep a fresh copy;
 // use the saved copy only when offline.
 
-const CACHE_NAME = 'sazon-v1';
+const CACHE_NAME = 'sazon-v2';
 
 // Paths are relative to this file, so they work under /sazon/ on GitHub Pages (D-038).
 const APP_FILES = [
   './',
   './index.html',
+  './lab.html',
+  './css/tokens.css',
   './css/app.css',
+  './css/lab.css',
   './js/app.js',
   './manifest.webmanifest',
   './icons/icon-192.png',
-  './icons/icon-512.png'
+  './icons/icon-512.png',
+  './fonts/bricolage-grotesque.woff2',
+  './fonts/dm-sans.woff2',
+  './masks/blob-1.svg'
 ];
 
 // Install: save the app files for offline use.

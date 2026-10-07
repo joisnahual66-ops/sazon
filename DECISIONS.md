@@ -202,7 +202,7 @@ Decision: v0.1 interface is in English. Interface text should be written so it c
 Why: Keep v0.1 small without blocking Spanish later.
 
 ### D-034 Display font
-Approved · 2026-10-06 · Tech Lead
+Superseded by D-041
 Decision: Aminute is a visual reference only until its web-embedding license is verified. A free alternative is chosen in Milestone 02 if needed.
 
 ### D-035 Hosting: GitHub Pages (supersedes D-011)
@@ -240,10 +240,66 @@ Why: Android needs icons to install the app properly. The status line lets the P
 
 ---
 
+## Milestone 02 — Design system
+
+### D-041 Display typeface: Bricolage Grotesque (supersedes D-034)
+Approved · 2026-10-07 · Tech Lead + Product Owner
+Decision: Bricolage Grotesque (OFL) for display, titles and section headings. Aminute is retired as a reference. Prata was considered and set aside for now.
+Why: Closest free match to the editorial, slightly quirky headline feel of the visual direction; variable weights 200–800.
+
+### D-042 Body / UI typeface: DM Sans
+Approved · 2026-10-07 · Tech Lead + Product Owner
+Decision: DM Sans (OFL) for body text, labels, metadata and buttons.
+
+### D-043 Design System v0.1
+Approved · 2026-10-07 · Tech Lead + Product Owner
+Decision: Colors, type scale, spacing scale, radii, component list, photo behavior and accessibility rules follow Appendix B.
+Why: A small, fixed set of values keeps every screen consistent and is easy to change in one place.
+
+### D-044 Card palette includes aqua; no blue
+Approved · 2026-10-07 · Tech Lead + Product Owner
+Decision: Card colors are salmon, mint, cream, yellow, lavender and aqua (`#8ED6CB`, e.g. Salads). The optional blue is dropped.
+
+### D-045 Heart color is semantic only
+Approved · 2026-10-07 · Tech Lead + Product Owner
+Decision: `heart` `#E0453A` is used only for the Favorite state, never as a decorative palette color.
+
+### D-046 Illustrations: flat vector SVG
+Approved · 2026-10-07 · Tech Lead + Product Owner
+Decision: Category and empty-state illustrations are flat SVG, 2–3 tones per object, no outlines, palette-friendly. About 8 assets, produced by the Product Owner.
+
+### D-047 Photo masks supplied by the Product Owner
+Approved · 2026-10-07 · Tech Lead + Product Owner
+Decision: 4–6 SVG masks named `blob-1.svg` … `blob-6.svg` in `masks/`: single closed path, no stroke, solid fill, viewBox `0 0 100 100`. A temporary `blob-1.svg` placeholder is used until delivered. Replacing the file requires no code change.
+
+### D-048 No per-ingredient icons in v0.1
+Approved · 2026-10-07 · Tech Lead + Product Owner
+Decision: Ingredient rows are text only.
+
+### D-049 Photos are masked, not cut out
+Approved · 2026-10-07 · Tech Lead + Product Owner
+Decision: User photos are shown inside organic masks on a color backdrop. No background removal (it would require AI, out of scope per D-002).
+
+### D-050 Self-hosted fonts
+Proposed · 2026-10-07 · Claude
+Decision: Font files (Latin subset, variable weight, WOFF2) are stored in the repository under `fonts/` with their OFL license files, and cached by the service worker. Google Fonts' servers are not used.
+Why: Fonts loaded from Google are not saved for offline use by our service worker (it only handles our own site), so offline the app would fall back to system fonts. Self-hosting is free, works offline, adds ~78 KB, and sends no visitor data to a third party.
+
+### D-051 Interface icons: Lucide
+Proposed · 2026-10-07 · Claude
+Decision: Interface icons come from Lucide (ISC license), embedded as inline SVG. No icon library is loaded.
+Why: Free, consistent 2 px rounded line style matching Appendix B; inline SVG needs no extra files or requests.
+
+### D-052 Temporary Design Lab page
+Proposed · 2026-10-07 · Claude
+Decision: `lab.html` (styled by `css/lab.css`) shows every design-system piece for review on the phone. Both are temporary and are deleted once real screens replace them.
+
+---
+
 ## Open questions
 
 - ~~Q-1 App UI language~~ → resolved by D-033.
-- Q-2 Aminute web-embedding license → pending verification (D-034).
+- ~~Q-2 Aminute web-embedding license~~ → closed; Aminute retired as reference (D-041).
 - ~~Q-3 Hosting~~ → resolved by D-035.
 
 ---
@@ -275,3 +331,50 @@ Why: Android needs icons to install the app properly. The status line lets the P
 **Step:** `id`, `text` (required), `photoId` (optional; not used in v0.1 interface).
 
 **Provenance:** `sourceType` (`own` / `person` / `book` / `website` / `other`), `sourceName`, `sourceUrl`, `basedOn` (empty, or `{ recipeId, title, author }`).
+
+---
+
+## Appendix B — Design System v0.1
+
+Tokens live in `css/tokens.css`; this table is the reference.
+
+**Color**
+
+| Token | HEX | Use |
+|---|---|---|
+| `bg` | `#F2E6DF` | App background |
+| `surface` | `#FAF3EE` | Raised neutral cards, sheets, bottom nav |
+| `surface-sunken` | `#E9DCD4` | Inputs, inactive pills |
+| `ink` | `#221C19` | Primary text and icons; the only text color on card colors |
+| `ink-soft` | `#5E514A` | Secondary text on neutral backgrounds only |
+| `line` | `#D9C8BE` | Decorative dividers only |
+| `salmon` | `#FB8E80` | Card |
+| `mint` | `#BCD9C7` | Card |
+| `cream` | `#F6EBD9` | Card |
+| `yellow` | `#FDD873` | Card, primary action, selected state |
+| `lavender` | `#C8B0FA` | Card |
+| `aqua` | `#8ED6CB` | Card |
+| `heart` | `#E0453A` | Favorite state only |
+
+Never white text on the palette.
+
+**Type**
+
+| Role | Family | Size / line-height | Weight |
+|---|---|---|---|
+| Display | Bricolage Grotesque | 40 / 1.0, −2% tracking | 600 |
+| Title | Bricolage Grotesque | 32 / 1.05, −2% tracking | 600 |
+| Section | Bricolage Grotesque | 22 / 1.15 | 600 |
+| Body | DM Sans | 16 / 1.5 | 400 |
+| Label / button | DM Sans | 15–16 / 1.2 | 500–600 |
+| Metadata | DM Sans | 13 / 1.3 (minimum size anywhere) | 500 |
+
+**Spacing:** 4 · 8 · 12 · 16 · 24 · 32 · 48 px. Screen margin 16, card gap 12, card padding 16, section gap 32.
+
+**Radius:** large card 24 · small card / list row / input 16 · buttons, pills, chips fully rounded · icon buttons circular · photos use SVG masks.
+
+**Components:** Button (primary, secondary, action card) · Icon button · Chip / pill · Segmented control · Stepper · Recipe card · Category card · Meta item · List row · Step item · Input (text, multi-line, select row) · Top bar · Bottom navigation (4 tabs + central add) · Photo frame.
+
+**Photo behavior:** color backdrop (`appearance.color`) + organic mask (`appearance.mask`) + CSS treatment (`natural`, `warm`, `tint`). No photo → category illustration on the card color inside the same mask.
+
+**Accessibility:** tap targets ≥ 48 × 48 px · minimum text 13 px · selected states use more than color alone · visible focus outline.
