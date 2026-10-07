@@ -1,7 +1,7 @@
 // Sazón service worker (updated in Milestone 04).
 // Strategy (D-056): network first with a 3-second limit; saved copy when offline or too slow.
 
-const CACHE_NAME = 'sazon-v6';
+const CACHE_NAME = 'sazon-v7';
 
 // Paths are relative to this file, so they work under /sazon/ on GitHub Pages (D-038).
 const APP_FILES = [
@@ -9,11 +9,13 @@ const APP_FILES = [
   './index.html',
   './lab.html',
   './recipe.html',
+  './edit.html',
   './css/tokens.css',
   './css/app.css',
   './css/lab.css',
   './css/recipe-detail.css',
   './css/dev.css',
+  './css/recipe-form.css',
   './js/app.js',
   './js/format.js',
   './js/data/sample-recipe.js',
@@ -22,6 +24,12 @@ const APP_FILES = [
   './js/screens/recipe-detail.js',
   './js/pages/recipe-page.js',
   './js/pages/home-page.js',
+  './js/pages/edit-page.js',
+  './js/screens/recipe-form.js',
+  './js/ui/fields.js',
+  './js/model/recipe.js',
+  './js/model/quantity.js',
+  './js/model/units.js',
   './js/vendor/dexie.mjs',
   './js/db/database.js',
   './js/db/recipes.js',

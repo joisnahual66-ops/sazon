@@ -27,7 +27,17 @@ async function show() {
   app.replaceChildren(screen, bottomNav('recipes'));
 }
 
-show().catch((error) => {
-  console.error('Could not open the recipe database:', error);
-  app.replaceChildren(renderRecipeNotFound(), bottomNav('recipes'));
+function showSafely() {
+  show().catch((error) => {
+    console.error('Could not open the recipe database:', error);
+    app.replaceChildren(renderRecipeNotFound(), bottomNav('recipes'));
+  });
+}
+
+showSafely();
+
+// Coming back with the Back button may show a remembered copy of this page;
+// read the recipe again so edits made meanwhile are always shown.
+window.addEventListener('pageshow', (event) => {
+  if (event.persisted) showSafely();
 });

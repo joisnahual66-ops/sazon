@@ -3,7 +3,7 @@
 
 import { h } from '../ui/dom.js';
 import { DATABASE_NAME, SCHEMA_VERSION, requestPersistentStorage, storageEstimate } from '../db/database.js';
-import { countRecipes, getRecipe } from '../db/recipes.js';
+import { listRecipes, getRecipe } from '../db/recipes.js';
 import { ensureSeed, SEED_RECIPE_ID } from '../db/seed.js';
 
 function row(label, value, ok) {
@@ -25,7 +25,14 @@ export async function runStorageCheck(container) {
     const seed = await ensureSeed();
     rows.push(row('Database', `Opened ✓ (${DATABASE_NAME}, schema v${SCHEMA_VERSION})`));
     rows.push(row('Seed recipe', seed.addedNow ? 'Stored now (first launch)' : 'Already stored ✓ (not added again)'));
-    rows.push(row('Recipes in database', String(await countRecipes())));
+    const all = await listRecipes();
+    rows.push(row('Recipes in database', String(all.length)));
+    rows.push(h('li', { class: 'dev-check__row' },
+      h('span', {}, 'Open a stored recipe'),
+      h('ul', { class: 'dev-check__recipes' }, all.map((r) =>
+        h('li', {}, h('a', { href: `./recipe.html?id=${encodeURIComponent(r.id)}&dev` }, r.title))
+      ))
+    ));
 
     const recipe = await getRecipe(SEED_RECIPE_ID);
     rows.push(row('Read back', recipe ? `${recipe.title} ✓` : 'Missing', !!recipe));

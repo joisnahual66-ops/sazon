@@ -46,3 +46,18 @@
   color: var(--color-ink-soft);
   word-break: break-all;
 }
+
+.dev-check__recipes {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.dev-check__recipes a {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--touch-target);
+  color: var(--color-ink);
+  font-weight: var(--weight-semibold);
+  font-size: var(--text-label);
+}

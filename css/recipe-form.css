@@ -1,0 +1,192 @@
+/* Create/Edit Recipe form. Uses only design tokens and app.css components. */
+
+.rf {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding: 0 var(--screen-margin) var(--space-7);
+}
+
+/* Top bar: close · title · save (sticky so Save is always reachable) */
+.rf-top {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin: 0 calc(var(--screen-margin) * -1);
+  padding: var(--space-2) var(--space-3);
+  background: var(--color-bg);
+  box-shadow: 0 1px 0 var(--color-line);
+}
+
+.rf-top__title {
+  flex: 1;
+}
+
+.rf-save-top {
+  padding: 0 var(--space-5);
+}
+
+.rf-save-bottom {
+  width: 100%;
+  min-height: 56px;
+  font-size: var(--text-label);
+}
+
+/* Cards */
+.rf-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding: var(--space-5) var(--space-4);
+  border-radius: var(--radius-card-lg);
+  background: var(--color-surface);
+}
+
+.rf-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3);
+}
+
+/* Inputs: multi-line, select, error state */
+.input--textarea {
+  min-height: 72px;
+  resize: none;
+  line-height: var(--leading-body);
+  overflow: hidden;
+}
+
+.input--select {
+  appearance: auto;
+  padding-right: var(--space-3);
+}
+
+.input[aria-invalid="true"] {
+  border-color: var(--color-ink);
+  box-shadow: inset 0 0 0 1px var(--color-ink);
+  background: var(--color-yellow);
+}
+
+.input:disabled {
+  opacity: 0.5;
+}
+
+/* Lists (ingredients, steps) */
+.rf-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.rf-add {
+  align-self: flex-start;
+}
+
+/* Ingredient row */
+.rf-ing {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding-bottom: var(--space-3);
+  border-bottom: 1px solid var(--color-line);
+}
+
+.rf-ing__top {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.rf-ing__top .input {
+  flex: 1;
+  min-width: 0;
+}
+
+.rf-ing__amount-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-2);
+  padding-right: calc(var(--touch-target) + var(--space-1));
+}
+
+/* Note & group (collapsed by default) */
+.rf-more__toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  min-height: var(--touch-target);
+  font-size: var(--text-meta);
+  font-weight: var(--weight-medium);
+  color: var(--color-ink-soft);
+  cursor: pointer;
+  list-style: none;
+}
+
+.rf-more__toggle::-webkit-details-marker {
+  display: none;
+}
+
+.rf-more[open] .rf-more__toggle .icon {
+  transform: rotate(180deg);
+}
+
+.rf-more__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+/* Step row */
+.rf-step {
+  display: grid;
+  grid-template-columns: 32px 1fr var(--touch-target);
+  gap: var(--space-2);
+  align-items: start;
+}
+
+.rf-step__number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  margin-top: var(--space-2);
+  border-radius: 50%;
+  background: var(--color-yellow);
+  font-family: var(--font-display);
+  font-weight: var(--weight-display);
+}
+
+/* Error summary */
+.rf-errors {
+  padding: var(--space-4);
+  border-radius: var(--radius-card-sm);
+  background: var(--color-yellow);
+  box-shadow: inset 0 0 0 1.5px var(--color-ink);
+}
+
+.rf-errors__title {
+  font-weight: var(--weight-semibold);
+  margin-bottom: var(--space-2);
+}
+
+.rf-errors ul {
+  margin: 0;
+  padding-left: var(--space-5);
+}
+
+.rf-errors__link {
+  min-height: 40px;
+  padding: 0;
+  border: 0;
+  background: none;
+  text-align: left;
+  text-decoration: underline;
+  cursor: pointer;
+}

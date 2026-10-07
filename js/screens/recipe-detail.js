@@ -14,9 +14,12 @@ function colorClass(color) {
 
 /* ---------- Sections ---------- */
 
-function topBar() {
+function topBar(recipe) {
   return h('header', { class: 'top-bar' },
-    h('a', { class: 'icon-btn', href: './', 'aria-label': 'Back' }, icon('back'))
+    h('a', { class: 'icon-btn', href: './', 'aria-label': 'Back' }, icon('back')),
+    recipe
+      ? h('a', { class: 'icon-btn', href: `./edit.html?id=${encodeURIComponent(recipe.id)}`, 'aria-label': 'Edit recipe' }, icon('pencil'))
+      : null
   );
 }
 
@@ -150,7 +153,7 @@ function source(recipe) {
 
 export function renderRecipeDetail(recipe) {
   return h('main', { class: 'rd' },
-    topBar(),
+    topBar(recipe),
     hero(recipe),
     metadata(recipe),
     ingredients(recipe),
