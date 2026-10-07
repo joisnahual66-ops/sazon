@@ -46,12 +46,12 @@ function hero(recipe) {
   );
 }
 
+// Time and optional calories only; servings live in Ingredients (D-057).
 function metadata(recipe) {
   const items = [];
   const minutes = totalMinutes(recipe);
   if (minutes) items.push(['clock', formatMinutes(minutes)]);
   if (recipe.caloriesPerServing) items.push(['flame', `${recipe.caloriesPerServing} kcal`]);
-  if (recipe.servings) items.push(['users', `${recipe.servings} ${recipe.servings === 1 ? 'serving' : 'servings'}`]);
   if (!items.length) return null;
 
   return h('div', { class: 'meta-row rd-meta' },
